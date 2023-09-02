@@ -1,25 +1,8 @@
 <script lang="ts">
+	import { steps } from '$lib/data/steps';
 	import Step from './step.svelte';
 
 	export let currentStep: number;
-	const steps = [
-		{
-			step: 1,
-			infoText: 'your info'
-		},
-		{
-			step: 2,
-			infoText: 'select plan'
-		},
-		{
-			step: 3,
-			infoText: 'add-ons'
-		},
-		{
-			step: 4,
-			infoText: 'summary'
-		}
-	];
 </script>
 
 <div>
