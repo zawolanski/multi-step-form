@@ -16,7 +16,9 @@
 		<button on:click={handleNext} class="next" type="button">Next step</button>
 	{/if}
 	{#if isLastStep}
-		<button on:click={handleComplete} class="confirm" type="button">Confirm</button>
+		<button on:click={handleComplete} class="confirm" type="submit" on:submit|preventDefault>
+			Confirm
+		</button>
 	{/if}
 </div>
 

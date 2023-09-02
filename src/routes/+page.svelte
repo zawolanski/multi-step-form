@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Buttons from '$lib/components/buttons.svelte';
+	import Form from '$lib/components/form/form.svelte';
 	import Steps from '$lib/components/steps/wrapper.svelte';
 	import { steps } from '$lib/data/steps';
 
@@ -8,9 +9,7 @@
 
 <Steps {currentStep} />
 <div class="container">
-	<form>
-		<div>Form</div>
-	</form>
+	<Form {currentStep} />
 	<Buttons
 		bind:currentStep
 		isFirstStep={currentStep === 1}
@@ -23,19 +22,11 @@
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
-		padding: 0 10rem;
-	}
-
-	form {
-		margin-inline: auto;
-		padding: 0 1.6rem;
-		margin-top: 16.8rem;
-		background-color: $white;
-		flex-grow: 1;
+		width: 100%;
+		// padding: 0 1.6rem;
 
 		@media (min-width: $tablet) {
-			margin: 0;
-			padding: 0;
+			padding: 0 10rem;
 		}
 	}
 </style>

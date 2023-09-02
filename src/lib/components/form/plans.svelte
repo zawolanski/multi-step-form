@@ -1,2 +1,7 @@
-<h1>Select your plan</h1>
-<p>You have the option of monthly or yearly billing.</p>
+<script>
+	import Header from './header.svelte';
+	import Text from './text.svelte';
+</script>
+
+<Header>Select your plan</Header>
+<Text>You have the option of monthly or yearly billing.</Text>
