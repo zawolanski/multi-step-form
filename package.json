@@ -30,6 +30,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource/ubuntu": "^5.0.8",
 		"svelte-use-form": "^2.9.1"
 	}
 }
