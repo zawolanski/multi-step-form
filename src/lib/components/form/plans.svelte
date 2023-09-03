@@ -81,9 +81,10 @@
 		padding: 1.6rem;
 		display: flex;
 		gap: 1.4rem;
+		transition: border-color 0.15s, background-color 0.15s;
 
 		&:has(input[type='radio']:checked) {
-			border: 1px solid $purplishBlue;
+			border-color: $purplishBlue;
 			background-color: $veryLightGrey;
 		}
 

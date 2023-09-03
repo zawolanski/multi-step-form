@@ -17,4 +17,4 @@ export const steps = [
   }
 ];
 
-export type Keys = 'plan' | 'name' | 'email' | 'phoneNumber' | 'duration';
+export type Keys = 'plan' | 'name' | 'email' | 'phoneNumber' | 'duration' | 'onlineServices' | 'largerStorage' | 'customizableProfile';

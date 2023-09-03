@@ -7,12 +7,18 @@
 
 	import { useForm } from 'svelte-use-form';
 
-	const form = useForm<Keys>({ plan: { initial: 'arcade' } });
+	const form = useForm<Keys>({
+		plan: { initial: 'arcade' },
+		onlineServices: { initial: '' },
+		largerStorage: { initial: '' },
+		customizableProfile: { initial: '' }
+	});
 
 	export let currentStep: number;
 
 	$: {
 		console.log($form.values);
+		console.log($form);
 	}
 </script>
 
@@ -24,7 +30,7 @@
 		<Plans values={$form.values} />
 	</div>
 	<div>
-		<AddOns />
+		<AddOns values={$form.values} />
 	</div>
 	<div>
 		<Finishing />

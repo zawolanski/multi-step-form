@@ -3,5 +3,7 @@
 	import Text from './text.svelte';
 </script>
 
-<Header>Finishing up</Header>
-<Text>Double-check everything looks OK before confirming.</Text>
+<Text>
+	Finishing up
+	<svelte:fragment slot="text">Double-check everything looks OK before confirming.</svelte:fragment>
+</Text>
