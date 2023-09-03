@@ -39,7 +39,7 @@
 
 		@media (min-width: $tablet) {
 			position: relative;
-			padding: 1.6rem 0;
+			padding: 1.6rem 10rem;
 		}
 	}
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Keys } from '$lib/data/steps';
 	import AddOns from './addOns.svelte';
 	import Finishing from './finishing.svelte';
 	import PersonalInfo from './personalInfo.svelte';
@@ -6,7 +7,7 @@
 
 	import { useForm } from 'svelte-use-form';
 
-	const form = useForm();
+	const form = useForm<Keys>({ plan: { initial: 'arcade' } });
 
 	export let currentStep: number;
 
@@ -20,7 +21,7 @@
 		<PersonalInfo />
 	</div>
 	<div>
-		<Plans />
+		<Plans values={$form.values} />
 	</div>
 	<div>
 		<AddOns />
@@ -38,15 +39,23 @@
 		margin: 1.6rem;
 		width: 100%;
 		box-shadow: $mainWrapperShadow;
+		margin-bottom: 8rem;
+		height: fit-content;
+
+		@media (min-width: $tablet) {
+			margin: 0;
+			padding: 2.4rem 10rem;
+			box-shadow: none;
+		}
 	}
 
 	form {
 		margin-inline: auto;
 		margin-top: 9.5rem;
-		flex-grow: 1;
 		width: 400%;
 		display: flex;
 		transition: transform 0.15s;
+		overflow: hidden;
 
 		@media (min-width: $tablet) {
 			margin: 0;

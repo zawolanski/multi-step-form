@@ -23,10 +23,6 @@
 		flex-direction: column;
 		flex-grow: 1;
 		width: 100%;
-		// padding: 0 1.6rem;
-
-		@media (min-width: $tablet) {
-			padding: 0 10rem;
-		}
+		overflow: hidden;
 	}
 </style>

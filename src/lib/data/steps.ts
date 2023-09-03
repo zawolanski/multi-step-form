@@ -16,3 +16,5 @@ export const steps = [
     infoText: 'summary'
   }
 ];
+
+export type Keys = 'plan' | 'name' | 'email' | 'phoneNumber' | 'duration';
