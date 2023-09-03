@@ -4,7 +4,7 @@
 	import Steps from '$lib/components/steps/wrapper.svelte';
 	import { steps } from '$lib/data/steps';
 
-	let currentStep = 1;
+	let currentStep = 4;
 </script>
 
 <Steps {currentStep} />

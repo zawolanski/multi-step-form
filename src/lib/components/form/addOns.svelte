@@ -1,28 +1,8 @@
 <script lang="ts">
+	import { addOnsOptions } from '$lib/data/addOns';
 	import type { Keys } from '$lib/data/steps';
 	import Text from './text.svelte';
 	import type { FormValues } from 'svelte-use-form/models/form';
-
-	const options = [
-		{
-			id: 'onlineServices',
-			header: 'Online services',
-			text: 'Access to multiplayer games',
-			price: 10
-		},
-		{
-			id: 'largerStorage',
-			header: 'Larger storage',
-			text: 'Extra 1TB of cloud save',
-			price: 20
-		},
-		{
-			id: 'customizableProfile',
-			header: 'Customizable profile',
-			text: 'Custom theme on your profile',
-			price: 20
-		}
-	];
 
 	export let values: FormValues<Keys>;
 </script>
@@ -32,7 +12,7 @@
 	<svelte:fragment slot="text">Add-ons help enhance your gaming experience.</svelte:fragment>
 </Text>
 <div class="options_container">
-	{#each options as { header, id, price, text }}
+	{#each addOnsOptions as { header, id, price, text }}
 		<div class="option">
 			<input {id} type="checkbox" name={id} checked={values[id] !== ''} />
 			<label for={id}>

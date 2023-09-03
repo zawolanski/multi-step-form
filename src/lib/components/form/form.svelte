@@ -33,7 +33,7 @@
 		<AddOns values={$form.values} />
 	</div>
 	<div>
-		<Finishing />
+		<Finishing values={$form.values} />
 	</div>
 </form>
 
