@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { addOnsOptions } from '$lib/data/addOns';
 	import type { Keys } from '$lib/data/steps';
-	import Text from './text.svelte';
+	import Text from './Text.svelte';
 	import type { FormValues } from 'svelte-use-form/models/form';
 
 	export let values: FormValues<Keys>;

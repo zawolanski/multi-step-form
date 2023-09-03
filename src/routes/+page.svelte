@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Buttons from '$lib/components/buttons.svelte';
-	import Form from '$lib/components/form/form.svelte';
+	import Buttons from '$lib/components/Buttons.svelte';
+	import Form from '$lib/components/form/Form.svelte';
 	import Steps from '$lib/components/steps/wrapper.svelte';
 	import { steps } from '$lib/data/steps';
 
-	let currentStep = 4;
+	let currentStep = 1;
 </script>
 
 <Steps {currentStep} />

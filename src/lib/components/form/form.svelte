@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { useForm } from 'svelte-use-form';
+
 	import type { Keys } from '$lib/data/steps';
+
 	import AddOns from './addOns.svelte';
 	import Finishing from './finishing.svelte';
-	import PersonalInfo from './personalInfo.svelte';
+	import PersonalInfo from './PersonalInformation.svelte';
 	import Plans from './plans.svelte';
-
-	import { useForm } from 'svelte-use-form';
 
 	const form = useForm<Keys>({
 		plan: { initial: 'arcade' },

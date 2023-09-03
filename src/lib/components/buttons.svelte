@@ -44,7 +44,7 @@
 	}
 
 	button {
-		font-family: Ubuntu;
+		font-family: 'Ubuntu';
 		font-size: 1.4rem;
 		font-weight: 500;
 		border: 0;

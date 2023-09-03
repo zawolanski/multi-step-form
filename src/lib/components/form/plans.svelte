@@ -3,7 +3,7 @@
 	import IconArcade from '$lib/assets/icon-arcade.svelte';
 	import IconPro from '$lib/assets/icon-pro.svelte';
 	import type { Keys } from '$lib/data/steps';
-	import Text from './text.svelte';
+	import Text from './Text.svelte';
 	import type { FormValues } from 'svelte-use-form/models/form';
 
 	export let values: FormValues<Keys>;
