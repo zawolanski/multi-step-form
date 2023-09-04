@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { useForm } from 'svelte-use-form';
+	import { useForm, required, email } from 'svelte-use-form';
 
+	import { isFormValid } from '$lib/store/form';
 	import type { Keys } from '$lib/data/steps';
 
 	import AddOns from './addOns.svelte';
@@ -12,7 +13,10 @@
 		plan: { initial: 'arcade' },
 		onlineServices: { initial: '' },
 		largerStorage: { initial: '' },
-		customizableProfile: { initial: '' }
+		customizableProfile: { initial: '' },
+		name: { initial: '', validators: [required] },
+		email: { initial: '', validators: [required, email] },
+		phoneNumber: { initial: '', validators: [required] }
 	});
 
 	export let currentStep: number;
@@ -20,12 +24,14 @@
 	$: {
 		console.log($form.values);
 		console.log($form);
+
+		isFormValid.set($form.valid);
 	}
 </script>
 
 <form use:form style={`transform: translateX(-${(currentStep - 1) * 25}%)`}>
 	<div>
-		<PersonalInfo />
+		<PersonalInfo bind:formData={$form} />
 	</div>
 	<div>
 		<Plans values={$form.values} />

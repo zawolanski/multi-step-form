@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { isFormValid } from '$lib/store/form';
+
 	export let isLastStep: boolean;
 	export let isFirstStep: boolean;
 	export let currentStep: number;
@@ -13,7 +15,9 @@
 		<button on:click={handleBack} class="back" type="button">Go back</button>
 	{/if}
 	{#if !isLastStep}
-		<button on:click={handleNext} class="next" type="button">Next step</button>
+		<button on:click={handleNext} class="next" type="button" disabled={!$isFormValid}
+			>Next step</button
+		>
 	{/if}
 	{#if isLastStep}
 		<button on:click={handleComplete} class="confirm" type="submit" on:submit|preventDefault>
@@ -51,7 +55,7 @@
 		border-radius: 0.4rem;
 		padding: 1.2rem 1.6rem;
 		cursor: pointer;
-		transition: background-color 0.15s, color 0.15s;
+		transition: background-color 0.15s, color 0.15s, opacity 0.15s;
 		background: transparent;
 		color: $white;
 
@@ -66,8 +70,15 @@
 		&.next {
 			background-color: $marineBlue;
 
-			&:hover {
-				background-color: $marineBlueHover;
+			&:not(:disabled) {
+				&:hover {
+					background-color: $marineBlueHover;
+				}
+			}
+
+			&:disabled {
+				cursor: not-allowed;
+				opacity: 0.75;
 			}
 		}
 
