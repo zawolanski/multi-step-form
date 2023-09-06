@@ -5,6 +5,7 @@
 	import type { FormValues } from 'svelte-use-form/models/form';
 
 	export let values: FormValues<Keys>;
+	export let currentStep: number;
 </script>
 
 <Text>
@@ -14,7 +15,7 @@
 <div class="options_container">
 	{#each addOnsOptions as { header, id, price, text }}
 		<div class="option">
-			<input {id} type="checkbox" name={id} checked={values[id] !== ''} />
+			<input {id} type="checkbox" name={id} checked={values[id] !== ''} tabindex={currentStep === 3 ? 0 : -1} />
 			<label for={id}>
 				<div class="label">
 					<div class="box" />

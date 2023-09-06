@@ -4,10 +4,10 @@
 	import { isFormValid } from '$lib/store/form';
 	import type { Keys } from '$lib/data/steps';
 
-	import AddOns from './addOns.svelte';
-	import Finishing from './finishing.svelte';
+	import AddOns from './AddOns.svelte';
+	import Finishing from './Finishing.svelte';
 	import PersonalInfo from './PersonalInformation.svelte';
-	import Plans from './plans.svelte';
+	import Plans from './Plans.svelte';
 
 	const form = useForm<Keys>({
 		plan: { initial: 'arcade' },
@@ -31,16 +31,16 @@
 
 <form use:form style={`transform: translateX(-${(currentStep - 1) * 25}%)`}>
 	<div>
-		<PersonalInfo bind:formData={$form} />
+		<PersonalInfo {currentStep} bind:formData={$form} />
 	</div>
 	<div>
-		<Plans values={$form.values} />
+		<Plans {currentStep} values={$form.values} />
 	</div>
 	<div>
-		<AddOns values={$form.values} />
+		<AddOns {currentStep} values={$form.values} />
 	</div>
 	<div>
-		<Finishing values={$form.values} />
+		<Finishing {currentStep} values={$form.values} />
 	</div>
 </form>
 

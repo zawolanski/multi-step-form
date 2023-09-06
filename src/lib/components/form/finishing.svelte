@@ -5,6 +5,7 @@
 	import type { FormValues } from 'svelte-use-form/models/form';
 
 	export let values: FormValues<Keys>;
+	export let currentStep: number;
 
 	$: selectedAddOns = addOnsOptions.filter(({ id }) => values[id] === 'checked');
 	$: isMonthly = values.duration === '';
@@ -18,7 +19,7 @@
 	<div class="plan">
 		<div>
 			<p>{values.plan} ({isMonthly ? 'Monthly' : 'Yearly'})</p>
-			<button>Change</button>
+			<button tabindex={currentStep === 4 ? 0 : -1}>Change</button>
 		</div>
 		<p>$90/{isMonthly ? 'mo' : 'yr'}</p>
 	</div>

@@ -4,6 +4,7 @@
 	import type { Keys } from '$lib/data/steps';
 
 	export let formData: Form<Keys> & FormControlsSpecified<Keys> & FormControlsUnspecified;
+	export let currentStep: number;
 
 	$: isNameTouched = formData.name.touched;
 	$: isNameValid = formData.name.valid;
@@ -39,6 +40,7 @@
 			placeholder="e.g. Stephen King"
 			class:invalid={isNameInvalid}
 			aria-invalid={isNameInvalid}
+			tabindex={currentStep === 1 ? 0 : -1}
 		/>
 	</div>
 	<div class="textField">
@@ -59,6 +61,7 @@
 			placeholder="e.g. stephenking@lorem.com"
 			class:invalid={isEmailInvalid}
 			aria-invalid={isEmailInvalid}
+			tabindex={currentStep === 1 ? 0 : -1}
 		/>
 	</div>
 	<div class="textField">
@@ -74,6 +77,7 @@
 			placeholder="e.g. +1 234 567 890"
 			class:invalid={isPhoneNumberInvalid}
 			aria-invalid={isPhoneNumberInvalid}
+			tabindex={currentStep === 1 ? 0 : -1}
 		/>
 	</div>
 </div>

@@ -7,6 +7,7 @@
 	import type { FormValues } from 'svelte-use-form/models/form';
 
 	export let values: FormValues<Keys>;
+	export let currentStep: number;
 
 	$: isDurationChecked = values.duration === 'checked';
 </script>
@@ -17,7 +18,14 @@
 </Text>
 <div class="container">
 	<div class="radio_container">
-		<input id="arcade" name="plan" type="radio" value="arcade" checked={values.plan === 'arcade'} />
+		<input
+			id="arcade"
+			name="plan"
+			type="radio"
+			value="arcade"
+			checked={values.plan === 'arcade'}
+			tabindex={currentStep === 2 ? 0 : -1}
+		/>
 		<IconArcade />
 		<label for="arcade">
 			<span class="title">Arcade</span>
@@ -34,6 +42,7 @@
 			type="radio"
 			value="advanced"
 			checked={values.plan === 'advanced'}
+			tabindex={currentStep === 2 ? 0 : -1}
 		/>
 		<IconAdvanced />
 		<label for="advanced">
@@ -45,7 +54,14 @@
 		</label>
 	</div>
 	<div class="radio_container">
-		<input id="pro" name="plan" type="radio" value="pro" checked={values.plan === 'pro'} />
+		<input
+			id="pro"
+			name="plan"
+			type="radio"
+			value="pro"
+			checked={values.plan === 'pro'}
+			tabindex={currentStep === 2 ? 0 : -1}
+		/>
 		<IconPro />
 		<label for="pro">
 			<span class="title">Pro</span>
@@ -57,7 +73,14 @@
 	</div>
 </div>
 <div class="toggle_container">
-	<input id="duration" type="checkbox" role="switch" name="duration" checked={isDurationChecked} />
+	<input
+		id="duration"
+		type="checkbox"
+		role="switch"
+		name="duration"
+		checked={isDurationChecked}
+		tabindex={currentStep === 2 ? 0 : -1}
+	/>
 	<label for="duration" class="visuallyhidden">Monthly subscription</label>
 	<div class="state">
 		<div class="monthly" aria-hidden="true" class:checked={isDurationChecked}>Monthly</div>
