@@ -68,7 +68,8 @@
 		width: 400%;
 		display: flex;
 		transition: transform 0.15s;
-		overflow: hidden;
+		overflow: hidden auto;
+		height: 100%;
 
 		@media (min-width: $tablet) {
 			margin: 0;

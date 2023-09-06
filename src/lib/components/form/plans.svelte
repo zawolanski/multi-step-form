@@ -1,15 +1,18 @@
 <script lang="ts">
+	import type { FormValues } from 'svelte-use-form/models/form';
+
 	import IconAdvanced from '$lib/assets/icon-advanced.svelte';
 	import IconArcade from '$lib/assets/icon-arcade.svelte';
 	import IconPro from '$lib/assets/icon-pro.svelte';
+	import { plansOptions } from '$lib/data/plans';
 	import type { Keys } from '$lib/data/steps';
+
 	import Text from './Text.svelte';
-	import type { FormValues } from 'svelte-use-form/models/form';
 
 	export let values: FormValues<Keys>;
 	export let currentStep: number;
 
-	$: isDurationChecked = values.duration === 'checked';
+	$: isYearlyBilling = values.duration === 'checked';
 </script>
 
 <Text>
@@ -17,60 +20,32 @@
 	<svelte:fragment slot="text">You have the option of monthly or yearly billing.</svelte:fragment>
 </Text>
 <div class="container">
-	<div class="radio_container">
-		<input
-			id="arcade"
-			name="plan"
-			type="radio"
-			value="arcade"
-			checked={values.plan === 'arcade'}
-			tabindex={currentStep === 2 ? 0 : -1}
-		/>
-		<IconArcade />
-		<label for="arcade">
-			<span class="title">Arcade</span>
-			<span class="price">$9/mo</span>
-			{#if isDurationChecked}
-				<span class="free">2 months free</span>
-			{/if}
-		</label>
-	</div>
-	<div class="radio_container">
-		<input
-			id="advanced"
-			name="plan"
-			type="radio"
-			value="advanced"
-			checked={values.plan === 'advanced'}
-			tabindex={currentStep === 2 ? 0 : -1}
-		/>
-		<IconAdvanced />
-		<label for="advanced">
-			<span class="title">Advanced</span>
-			<span class="price">$12/mo</span>
-			{#if isDurationChecked}
-				<span class="free">2 months free</span>
-			{/if}
-		</label>
-	</div>
-	<div class="radio_container">
-		<input
-			id="pro"
-			name="plan"
-			type="radio"
-			value="pro"
-			checked={values.plan === 'pro'}
-			tabindex={currentStep === 2 ? 0 : -1}
-		/>
-		<IconPro />
-		<label for="pro">
-			<span class="title">Pro</span>
-			<span class="price">$15/mo</span>
-			{#if isDurationChecked}
-				<span class="free">2 months free</span>
-			{/if}
-		</label>
-	</div>
+	{#each plansOptions as { id, header, yearText, icon, price }}
+		<div class="radio_container">
+			<input
+				{id}
+				name="plan"
+				type="radio"
+				value={id}
+				checked={values.plan === id}
+				tabindex={currentStep === 2 ? 0 : -1}
+			/>
+			<svelte:component this={icon} />
+			<label for={id}>
+				<span class="title">{header}</span>
+				<span class="price">
+					{#if isYearlyBilling}
+						${price.year}/yr
+					{:else}
+						${price.month}/mo
+					{/if}
+				</span>
+				{#if isYearlyBilling}
+					<span class="free">{yearText}</span>
+				{/if}
+			</label>
+		</div>
+	{/each}
 </div>
 <div class="toggle_container">
 	<input
@@ -78,14 +53,14 @@
 		type="checkbox"
 		role="switch"
 		name="duration"
-		checked={isDurationChecked}
+		checked={isYearlyBilling}
 		tabindex={currentStep === 2 ? 0 : -1}
 	/>
 	<label for="duration" class="visuallyhidden">Monthly subscription</label>
 	<div class="state">
-		<div class="monthly" aria-hidden="true" class:checked={isDurationChecked}>Monthly</div>
-		<div class="position_container" class:checked={isDurationChecked} />
-		<div class="yearly" aria-hidden="true" class:checked={!isDurationChecked}>Yearly</div>
+		<div class="monthly" aria-hidden="true" class:checked={isYearlyBilling}>Monthly</div>
+		<div class="position_container" class:checked={isYearlyBilling} />
+		<div class="yearly" aria-hidden="true" class:checked={!isYearlyBilling}>Yearly</div>
 	</div>
 </div>
 
@@ -95,6 +70,12 @@
 		flex-direction: column;
 		gap: 1.4rem;
 		margin-bottom: 2.4rem;
+
+		@media (min-width: $tablet) {
+			flex-direction: row;
+			gap: 1.8rem;
+			margin-bottom: 3.2rem;
+		}
 	}
 
 	.radio_container {
@@ -106,9 +87,20 @@
 		gap: 1.4rem;
 		transition: border-color 0.15s, background-color 0.15s;
 
+		@media (min-width: $tablet) {
+			padding: 2rem 1.8rem;
+			flex-direction: column;
+			flex-basis: 33.33%;
+			gap: 4rem;
+		}
+
 		&:has(input[type='radio']:checked) {
 			border-color: $purplishBlue;
 			background-color: $veryLightGrey;
+		}
+
+		&:has(input[type='radio']:focus) {
+			outline: solid;
 		}
 
 		label {
@@ -142,6 +134,7 @@
 			top: 0;
 			left: 0;
 			margin: 0;
+			z-index: 2;
 		}
 	}
 
@@ -150,18 +143,6 @@
 		border-radius: 0.8rem;
 		padding: 1.3rem;
 		position: relative;
-
-		input[type='checkbox'] {
-			width: 100%;
-			height: 100%;
-			cursor: pointer;
-			opacity: 0;
-			position: absolute;
-			top: 0;
-			left: 0;
-			margin: 0;
-			z-index: 2;
-		}
 
 		.state {
 			display: flex;
@@ -202,6 +183,22 @@
 					color: $coolGray;
 				}
 			}
+		}
+
+		input[type='checkbox'] {
+			width: 100%;
+			height: 100%;
+			cursor: pointer;
+			opacity: 0;
+			position: absolute;
+			top: 0;
+			left: 0;
+			margin: 0;
+			z-index: 2;
+		}
+
+		input[type='checkbox']:focus ~ .state > .position_container {
+			outline: solid;
 		}
 	}
 
