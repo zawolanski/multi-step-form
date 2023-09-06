@@ -7,6 +7,10 @@
 	let currentStep = 1;
 </script>
 
+<svelte:head>
+    <title>Multi Step Form</title> 
+</svelte:head>
+
 <Steps {currentStep} />
 <div class="container">
 	<Form {currentStep} />

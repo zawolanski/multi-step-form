@@ -6,6 +6,8 @@
 
 	export let values: FormValues<Keys>;
 	export let currentStep: number;
+
+	$: isYearlyBilling = values.duration === 'checked';
 </script>
 
 <Text>
@@ -15,7 +17,13 @@
 <div class="options_container">
 	{#each addOnsOptions as { header, id, price, text }}
 		<div class="option">
-			<input {id} type="checkbox" name={id} checked={values[id] !== ''} tabindex={currentStep === 3 ? 0 : -1} />
+			<input
+				{id}
+				type="checkbox"
+				name={id}
+				checked={values[id] !== ''}
+				tabindex={currentStep === 3 ? 0 : -1}
+			/>
 			<label for={id}>
 				<div class="label">
 					<div class="box" />
@@ -23,7 +31,7 @@
 						<span class="header">{header}</span>
 						<span class="text">{text}</span>
 					</div>
-					<span class="price">+${price}/yr</span>
+					<span class="price">+${isYearlyBilling ? `${price.year}/yr` : `${price.month}/mo`}</span>
 				</div>
 			</label>
 		</div>
@@ -35,6 +43,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1.2rem;
+
+		@media (min-width: $tablet) {
+			gap: 1.6rem;
+		}
 	}
 
 	.option {
@@ -43,6 +55,10 @@
 		border-radius: 0.8rem;
 		border: 1px solid $lightGray;
 		transition: border-color 0.15s, background-color 0.15s;
+
+		@media (min-width: $tablet) {
+			padding: 1.8rem 2.4rem;
+		}
 
 		input[type='checkbox'] {
 			position: absolute;
@@ -54,6 +70,14 @@
 			opacity: 0;
 			cursor: pointer;
 			margin: 0;
+		}
+
+		input[type='checkbox']:checked ~ label > .label > .box {
+			background-color: $purplishBlue;
+			background-image: url('../../assets/check.svg');
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
 		}
 
 		.label {
