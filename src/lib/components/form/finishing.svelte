@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { addOnsOptions } from '$lib/data/addOns';
+	import { plansOptions } from '$lib/data/plans';
 	import type { Keys } from '$lib/data/steps';
 	import Text from './Text.svelte';
 	import type { FormValues } from 'svelte-use-form/models/form';
@@ -7,8 +8,13 @@
 	export let values: FormValues<Keys>;
 	export let currentStep: number;
 
+	$: [selectedPlan] = plansOptions.filter(({ id }) => values.plan === id);
 	$: selectedAddOns = addOnsOptions.filter(({ id }) => values[id] === 'checked');
-	$: isMonthly = values.duration === '';
+	$: totalPriceMonth =
+		selectedPlan.price.month + selectedAddOns.reduce((acc, cur) => acc + cur.price.month, 0);
+	$: totalPriceYear =
+		selectedPlan.price.year + selectedAddOns.reduce((acc, cur) => acc + cur.price.year, 0);
+	$: isYearlyBilling = values.duration === 'checked';
 </script>
 
 <Text>
@@ -18,24 +24,31 @@
 <div class="summary">
 	<div class="plan">
 		<div>
-			<p>{values.plan} ({isMonthly ? 'Monthly' : 'Yearly'})</p>
-			<button tabindex={currentStep === 4 ? 0 : -1}>Change</button>
+			<p>{values.plan} ({isYearlyBilling ? 'Yearly' : 'Monthly'})</p>
+			<button
+				tabindex={currentStep === 4 ? 0 : -1}
+				on:click={() => {
+					currentStep = 2;
+				}}>Change</button
+			>
 		</div>
-		<p>$90/{isMonthly ? 'mo' : 'yr'}</p>
+		<p>${isYearlyBilling ? `${selectedPlan.price.year}/yr` : `${selectedPlan.price.month}/mo`}</p>
 	</div>
 	{#if selectedAddOns.length > 0}
 		<div class="divider" />
 		{#each selectedAddOns as addOn}
 			<div class="addOn_container">
 				<p>{addOn.header}</p>
-				<p class="addOn_price">+{addOn.price}/{isMonthly ? 'mo' : 'yr'}</p>
+				<p class="addOn_price">
+					+${isYearlyBilling ? `${addOn.price.year}/yr` : `${addOn.price.month}/mo`}
+				</p>
 			</div>
 		{/each}
 	{/if}
 </div>
 <div class="total">
-	<p>Total (per {isMonthly ? 'month' : 'year'})</p>
-	<p class="total_price">$120/{isMonthly ? 'mo' : 'yr'}</p>
+	<p>Total (per {isYearlyBilling ? 'year' : 'month'})</p>
+	<p class="total_price">${isYearlyBilling ? `${totalPriceYear}/yr` : `${totalPriceMonth}/mo`}</p>
 </div>
 
 <style lang="scss">

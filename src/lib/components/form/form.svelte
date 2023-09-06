@@ -40,7 +40,7 @@
 		<AddOns {currentStep} values={$form.values} />
 	</div>
 	<div>
-		<Finishing {currentStep} values={$form.values} />
+		<Finishing bind:currentStep values={$form.values} />
 	</div>
 </form>
 

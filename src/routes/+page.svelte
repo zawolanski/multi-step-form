@@ -13,7 +13,7 @@
 
 <Steps {currentStep} />
 <div class="container">
-	<Form {currentStep} />
+	<Form bind:currentStep />
 	<Buttons
 		bind:currentStep
 		isFirstStep={currentStep === 1}
