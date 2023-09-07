@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { useForm, required, email } from 'svelte-use-form';
 
-	import { isFormValid } from '$lib/store/form';
+	import { isFormValid, isConfirmed } from '$lib/store/form';
 	import type { Keys } from '$lib/data/steps';
 
 	import AddOns from './AddOns.svelte';
 	import Finishing from './Finishing.svelte';
 	import PersonalInfo from './PersonalInformation.svelte';
 	import Plans from './Plans.svelte';
+	import Confirmation from './Confirmation.svelte';
 
 	const form = useForm<Keys>({
 		plan: { initial: 'arcade' },
@@ -29,7 +30,7 @@
 	}
 </script>
 
-<form use:form style={`transform: translateX(-${(currentStep - 1) * 25}%)`}>
+<form use:form style={`transform: translateX(-${(currentStep - 1 + ($isConfirmed ? 1 : 0)) * 20}%)`}>
 	<div>
 		<PersonalInfo {currentStep} bind:formData={$form} />
 	</div>
@@ -41,6 +42,9 @@
 	</div>
 	<div>
 		<Finishing bind:currentStep values={$form.values} />
+	</div>
+	<div>
+		<Confirmation />
 	</div>
 </form>
 
@@ -60,12 +64,13 @@
 			padding: 2.4rem 10rem;
 			box-shadow: none;
 		}
+
 	}
 
 	form {
 		margin-inline: auto;
 		margin-top: 9.5rem;
-		width: 400%;
+		width: 500%;
 		display: flex;
 		transition: transform 0.15s;
 		overflow: hidden auto;

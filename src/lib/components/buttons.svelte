@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { isFormValid } from '$lib/store/form';
+	import { isConfirmed, isFormValid } from '$lib/store/form';
 
 	export let isLastStep: boolean;
 	export let isFirstStep: boolean;
@@ -7,24 +7,26 @@
 
 	const handleNext = () => currentStep++;
 	const handleBack = () => currentStep--;
-	const handleComplete = () => currentStep;
+	const handleComplete = () => isConfirmed.set(true);
 </script>
 
-<div class:end={isFirstStep}>
-	{#if !isFirstStep}
-		<button on:click={handleBack} class="back" type="button">Go back</button>
-	{/if}
-	{#if !isLastStep}
-		<button on:click={handleNext} class="next" type="button" disabled={!$isFormValid}
-			>Next step</button
-		>
-	{/if}
-	{#if isLastStep}
-		<button on:click={handleComplete} class="confirm" type="submit" on:submit|preventDefault>
-			Confirm
-		</button>
-	{/if}
-</div>
+{#if !$isConfirmed}
+	<div class:end={isFirstStep}>
+		{#if !isFirstStep}
+			<button on:click={handleBack} class="back" type="button">Go back</button>
+		{/if}
+		{#if !isLastStep}
+			<button on:click={handleNext} class="next" type="button" disabled={!$isFormValid}>
+				Next step
+			</button>
+		{/if}
+		{#if isLastStep}
+			<button on:click={handleComplete} class="confirm" type="submit" on:submit|preventDefault>
+				Confirm
+			</button>
+		{/if}
+	</div>
+{/if}
 
 <style lang="scss">
 	div {
