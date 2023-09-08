@@ -7,7 +7,7 @@
 	import { plansOptions } from '$lib/data/plans';
 	import type { Keys } from '$lib/data/steps';
 
-	import Text from './Text.svelte';
+	import Text from './text.svelte';
 
 	export let values: FormValues<Keys>;
 	export let currentStep: number;

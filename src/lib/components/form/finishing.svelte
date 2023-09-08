@@ -2,7 +2,7 @@
 	import { addOnsOptions } from '$lib/data/addOns';
 	import { plansOptions } from '$lib/data/plans';
 	import type { Keys } from '$lib/data/steps';
-	import Text from './Text.svelte';
+	import Text from './text.svelte';
 	import type { FormValues } from 'svelte-use-form/models/form';
 
 	export let values: FormValues<Keys>;

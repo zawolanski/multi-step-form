@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Buttons from '$lib/components/Buttons.svelte';
-	import Form from '$lib/components/form/Form.svelte';
+	import Buttons from '$lib/components/buttons.svelte';
+	import Form from '$lib/components/form/form.svelte';
 	import Steps from '$lib/components/steps/wrapper.svelte';
 	import { steps } from '$lib/data/steps';
 

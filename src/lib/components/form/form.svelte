@@ -4,11 +4,11 @@
 	import { isFormValid, isConfirmed } from '$lib/store/form';
 	import type { Keys } from '$lib/data/steps';
 
-	import AddOns from './AddOns.svelte';
-	import Finishing from './Finishing.svelte';
-	import PersonalInfo from './PersonalInformation.svelte';
-	import Plans from './Plans.svelte';
-	import Confirmation from './Confirmation.svelte';
+	import AddOns from './addOns.svelte';
+	import Finishing from './finishing.svelte';
+	import PersonalInfo from './personalInformation.svelte';
+	import Plans from './plans.svelte';
+	import Confirmation from './confirmation.svelte';
 
 	const form = useForm<Keys>({
 		plan: { initial: 'arcade' },
@@ -22,15 +22,13 @@
 
 	export let currentStep: number;
 
-	$: {
-		console.log($form.values);
-		console.log($form);
-
-		isFormValid.set($form.valid);
-	}
+	$: isFormValid.set($form.valid);
 </script>
 
-<form use:form style={`transform: translateX(-${(currentStep - 1 + ($isConfirmed ? 1 : 0)) * 20}%)`}>
+<form
+	use:form
+	style={`transform: translateX(-${(currentStep - 1 + ($isConfirmed ? 1 : 0)) * 20}%)`}
+>
 	<div>
 		<PersonalInfo {currentStep} bind:formData={$form} />
 	</div>
@@ -64,7 +62,6 @@
 			padding: 2.4rem 10rem;
 			box-shadow: none;
 		}
-
 	}
 
 	form {

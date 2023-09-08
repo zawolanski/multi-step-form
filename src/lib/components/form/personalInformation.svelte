@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Form, FormControlsSpecified, FormControlsUnspecified } from 'svelte-use-form';
-	import Text from './Text.svelte';
+	import Text from './text.svelte';
 	import type { Keys } from '$lib/data/steps';
 
 	export let formData: Form<Keys> & FormControlsSpecified<Keys> & FormControlsUnspecified;
@@ -16,8 +16,6 @@
 	$: isNameInvalid = isNameTouched && !isNameValid;
 	$: isEmailInvalid = isEmailTouched && !isEmailValid;
 	$: isPhoneNumberInvalid = isPhoneNumberTouched && !isPhoneNumberValid;
-
-	$: console.log('formData.email.errors?', formData.email.errors);
 </script>
 
 <Text>
