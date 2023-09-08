@@ -29,7 +29,9 @@ Users should be able to:
 
 ### Screenshot
 
+![Mobile](https://github.com/zawolanski/multi-step-form/assets/61630877/1a2268ae-bda5-41a6-920a-b51db0dcd96d)
 
+![Desktop](https://github.com/zawolanski/multi-step-form/assets/61630877/73a63bd9-a762-406a-b16f-96cd740f4946)
 
 ### Links
 
