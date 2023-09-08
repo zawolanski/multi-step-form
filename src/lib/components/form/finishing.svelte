@@ -24,7 +24,7 @@
 <div class="summary">
 	<div class="plan">
 		<div>
-			<p>{values.plan} ({isYearlyBilling ? 'Yearly' : 'Monthly'})</p>
+			<p class="plan_header">{values.plan} ({isYearlyBilling ? 'Yearly' : 'Monthly'})</p>
 			<button
 				tabindex={currentStep === 4 ? 0 : -1}
 				on:click={() => {
@@ -69,13 +69,13 @@
 			align-items: center;
 			color: $marineBlue;
 
-			& > div {
-				p {
-					text-transform: capitalize;
-					margin-bottom: 0.3rem;
-					font-weight: 500;
-				}
+			.plan_header {
+				text-transform: capitalize;
+				margin-bottom: 0.3rem;
+				font-weight: 500;
+			}
 
+			& > div {
 				button {
 					background: transparent;
 					border: 0;
